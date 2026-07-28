@@ -1,0 +1,118 @@
+.media-gallery {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 80;
+}
+
+.media-gallery__close {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  right: max(24px, env(safe-area-inset-right));
+  background: rgba(250, 247, 241, 0.06);
+  border: 1px solid rgba(250, 247, 241, 0.18);
+  color: var(--paper);
+  padding: 11px 22px;
+  font-size: 13px;
+  border-radius: 999px;
+  z-index: 2;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.media-gallery__close:hover {
+  background: rgba(250, 247, 241, 0.92);
+  color: var(--navy-deep);
+}
+
+.media-gallery__stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.media-gallery__frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+.media-gallery__media {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.media-gallery__pano-trigger {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.media-gallery__pano-badge {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  color: var(--navy-deep);
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.media-gallery__nav {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.media-gallery__nav button {
+  background: rgba(250, 247, 241, 0.06);
+  border: 1px solid rgba(250, 247, 241, 0.18);
+  color: var(--paper);
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  border-radius: 50%;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.media-gallery__nav button:hover:not(:disabled) {
+  background: rgba(250, 247, 241, 0.92);
+  color: var(--navy-deep);
+}
+
+.media-gallery__nav button:disabled {
+  opacity: 0.25;
+}
+
+.media-gallery__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.media-gallery__dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mute);
+}
+
+.media-gallery__dots span.is-active {
+  background: var(--accent-light);
+}
+

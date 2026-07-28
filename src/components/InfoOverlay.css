@@ -1,0 +1,136 @@
+.info-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 11, 18, 0.72);
+  backdrop-filter: blur(14px);
+}
+
+.info-overlay__close {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  right: max(24px, env(safe-area-inset-right));
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 15, 24, 0.55);
+  border: 1px solid rgba(250, 247, 241, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 50%;
+  color: var(--paper);
+  font-size: 24px;
+  line-height: 1;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.info-overlay__close:hover {
+  background: rgba(250, 247, 241, 0.92);
+  color: var(--navy-deep);
+}
+
+.info-overlay__panel {
+  width: min(480px, calc(100vw - 48px));
+  padding: 32px 36px;
+  background: rgba(12, 15, 24, 0.78);
+  border: 1px solid rgba(199, 154, 99, 0.3);
+  backdrop-filter: blur(24px);
+  border-radius: 26px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.55);
+}
+
+.info-overlay__panel--map {
+  width: min(1100px, calc(100vw - 160px));
+  height: min(680px, calc(100vh - 120px));
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 700px) {
+  .info-overlay__panel {
+    padding: 24px 20px;
+  }
+
+  .info-overlay__panel--map {
+    width: calc(100vw - 32px);
+    height: calc(100dvh - 110px);
+  }
+}
+
+.info-overlay__head {
+  margin-bottom: 20px;
+}
+
+.info-overlay__eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  color: var(--accent-light);
+  margin-bottom: 8px;
+}
+
+.info-overlay__head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--paper);
+}
+
+.info-overlay__map {
+  flex: 1;
+  min-height: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(250, 247, 241, 0.12);
+}
+
+.info-overlay__map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  filter: saturate(0.85) contrast(1.02);
+}
+
+.info-overlay__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-overlay__rows li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(250, 247, 241, 0.1);
+}
+
+.info-overlay__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--mute-2);
+}
+
+.info-overlay__value {
+  font-size: 15px;
+  color: var(--paper);
+}
+
+.info-overlay__note {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 247, 241, 0.1);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--mute-2);
+}

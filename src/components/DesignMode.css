@@ -1,0 +1,129 @@
+/* Resaltado de bloques arrastrables cuando el modo diseño está activo */
+body.design-mode .icon-rail,
+body.design-mode .media-rail,
+body.design-mode .zone-card,
+body.design-mode .intro__logo,
+body.design-mode .intro__title,
+body.design-mode .intro__enter,
+body.design-mode .intro__hint,
+body.design-mode .info-overlay,
+body.design-mode .media-gallery__frame,
+body.design-mode .masterplan__hotspot-layer {
+  outline: 1px dashed rgba(124, 224, 255, 0.75);
+  outline-offset: 4px;
+  cursor: grab !important;
+}
+
+body.design-mode * {
+  user-select: none;
+}
+
+.design-mode__guide {
+  position: fixed;
+  z-index: 299;
+  pointer-events: none;
+  background: #ff4fa3;
+  box-shadow: 0 0 6px rgba(255, 79, 163, 0.8);
+}
+
+.design-mode__guide--v {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.design-mode__guide--h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.design-mode__panel {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 300;
+  width: 280px;
+  color: #fff;
+  background: rgba(10, 14, 20, 0.85);
+  border: 1px solid rgba(124, 224, 255, 0.35);
+  border-radius: 14px;
+  padding: 14px 16px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  font-family: inherit;
+}
+
+.design-mode__panel strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #7ce0ff;
+}
+
+.design-mode__panel p {
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.75;
+  margin: 0 0 10px;
+}
+
+.design-mode__panel kbd {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+}
+
+.design-mode__empty {
+  font-style: italic;
+}
+
+.design-mode__panel ul {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.design-mode__panel li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.design-mode__panel code {
+  font-size: 12px;
+  color: #7ce0ff;
+}
+
+.design-mode__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.design-mode__actions button {
+  flex: 1;
+  font: inherit;
+  font-size: 12px;
+  color: #0a0e14;
+  background: #7ce0ff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.design-mode__actions button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.design-mode__actions .design-mode__reset {
+  flex: 0 0 auto;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}

@@ -1,0 +1,319 @@
+.masterplan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.masterplan__canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0d15;
+}
+
+/* Inner scene: breathes slowly once the flight video settles.
+   Hotspots live inside, so they stay glued to the buildings. */
+.masterplan__scene {
+  position: absolute;
+  inset: 0;
+}
+
+.masterplan__scene.is-idle {
+  animation: scene-breathe 26s ease-in-out infinite alternate;
+}
+
+@keyframes scene-breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+.masterplan__video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: blur(40px) brightness(0.5) saturate(1.2);
+  transform: scale(1.15);
+}
+
+.masterplan__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  box-shadow: 0 0 120px rgba(0, 0, 0, 0.6);
+}
+
+.masterplan__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(15, 19, 30, 0) 40%, rgba(15, 19, 30, 0.42) 100%),
+    linear-gradient(180deg, rgba(15, 19, 30, 0.55) 0%, rgba(15, 19, 30, 0) 26%, rgba(15, 19, 30, 0.5) 100%);
+}
+
+.masterplan__fade {
+  position: absolute;
+  inset: 0;
+  background: var(--navy-deep);
+  pointer-events: none;
+}
+
+.masterplan__flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 244, 224, 0.95) 0%, rgba(199, 154, 99, 0.5) 45%, rgba(26, 32, 48, 0) 75%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Layer matching the rendered video box — hotspot % are relative to the video content */
+.masterplan__hotspot-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.masterplan__hotspot-layer .hotspot {
+  pointer-events: auto;
+}
+
+/* ---- hotspots: architectural annotations ---- */
+/* Chip on top, thin gold stem, anchored dot on the building. */
+
+.hotspot {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, calc(-100% + 10px));
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hotspot__anchor {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.hotspot__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent-light);
+  opacity: 0.35;
+  animation: pulse 2.4s ease-out infinite;
+}
+
+.hotspot--primary .hotspot__pulse {
+  animation-duration: 1.8s;
+}
+
+.hotspot__dot {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--paper);
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(199, 154, 99, 0.8);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+
+.hotspot--primary .hotspot__dot {
+  background: var(--accent-light);
+}
+
+.hotspot:hover .hotspot__dot {
+  box-shadow: 0 0 34px rgba(199, 154, 99, 1);
+}
+
+.hotspot__stem {
+  width: 1px;
+  height: 34px;
+  flex-shrink: 0;
+  transform-origin: bottom center;
+  background: linear-gradient(180deg, rgba(199, 154, 99, 0.9) 0%, rgba(199, 154, 99, 0.15) 100%);
+}
+
+.hotspot--primary .hotspot__stem {
+  height: 44px;
+}
+
+.hotspot__chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px;
+  margin-bottom: 2px;
+  background: rgba(10, 13, 21, 0.55);
+  border: 1px solid rgba(199, 154, 99, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  white-space: nowrap;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  transition: background 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+
+.hotspot:hover .hotspot__chip {
+  background: rgba(199, 154, 99, 0.18);
+  border-color: var(--accent-light);
+  transform: translateY(-3px);
+}
+
+.hotspot__num {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--accent-light);
+}
+
+.hotspot__label {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+}
+
+.hotspot--primary .hotspot__label {
+  font-size: 20px;
+}
+
+.hotspot__cta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-light);
+  border-left: 1px solid rgba(199, 154, 99, 0.4);
+  padding-left: 12px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* ---- zone info card ---- */
+/* Sits clear of the media rail (24 + 240 + 24). */
+
+.zone-card {
+  position: absolute;
+  left: 144px;
+  bottom: 24px;
+  width: 360px;
+  padding: 26px 28px;
+  background: rgba(10, 13, 21, 0.62);
+  border: 1px solid rgba(199, 154, 99, 0.3);
+  backdrop-filter: blur(22px);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.zone-card__eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  color: var(--accent-light);
+  margin-bottom: 8px;
+}
+
+.zone-card h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--paper);
+}
+
+.zone-card p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--mute-2);
+}
+
+.zone-card__gallery {
+  margin-top: 18px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent-light);
+  padding: 0 0 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.zone-card__close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--mute-2);
+  font-size: 22px;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .zone-card {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    bottom: 92px;
+    padding: 20px 22px;
+  }
+}
+
+/* Close-together anchors make the wide text pill overlap on narrow screens
+   (chips are ~150-180px, anchors can be as little as 60px apart). Collapse
+   to a small numbered badge instead — full info still surfaces on tap via
+   the zoom-in (primary) or zone-card (secondary), so nothing is lost. */
+@media (max-width: 600px) {
+  .hotspot__chip {
+    gap: 0;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .hotspot__label,
+  .hotspot__cta {
+    display: none;
+  }
+
+  .hotspot__num {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .hotspot__stem {
+    height: 18px;
+  }
+
+  .hotspot--primary .hotspot__stem {
+    height: 20px;
+  }
+}

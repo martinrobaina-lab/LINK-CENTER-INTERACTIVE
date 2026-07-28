@@ -1,0 +1,145 @@
+.pos-editor {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  font-family: inherit;
+}
+
+.pos-editor__layer {
+  position: fixed;
+  pointer-events: auto;
+  outline: 1px dashed rgba(255, 255, 255, 0.35);
+  cursor: crosshair;
+}
+
+.pos-editor__marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.pos-editor__marker:active {
+  cursor: grabbing;
+}
+
+.pos-editor__ring {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #ffd166;
+  background: rgba(255, 209, 102, 0.25);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.35);
+}
+
+.pos-editor__marker--free .pos-editor__ring {
+  border-color: #7ce0ff;
+  background: rgba(124, 224, 255, 0.25);
+}
+
+.pos-editor__marker.is-moved .pos-editor__ring {
+  border-color: #8effa0;
+  background: rgba(142, 255, 160, 0.3);
+}
+
+.pos-editor__tag {
+  position: absolute;
+  left: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: rgba(10, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 3px 8px;
+  backdrop-filter: blur(6px);
+}
+
+.pos-editor__panel {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 280px;
+  pointer-events: auto;
+  color: #fff;
+  background: rgba(10, 14, 20, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 14px 16px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.pos-editor__panel strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.pos-editor__panel p {
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.75;
+  margin: 0 0 10px;
+}
+
+.pos-editor__panel kbd {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+}
+
+.pos-editor__panel ul {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.pos-editor__panel li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pos-editor__panel li.is-moved code {
+  color: #8effa0;
+}
+
+.pos-editor__panel code {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.pos-editor__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pos-editor__actions button {
+  flex: 1;
+  font: inherit;
+  font-size: 12px;
+  color: #0a0e14;
+  background: #ffd166;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.pos-editor__actions .pos-editor__reset {
+  flex: 0 0 auto;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}

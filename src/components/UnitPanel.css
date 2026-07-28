@@ -1,0 +1,390 @@
+.unit-panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.unit-panel__backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  filter: blur(14px) brightness(0.5);
+  transform: scale(1.08);
+}
+
+.unit-panel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 19, 30, 0.55) 0%, rgba(15, 19, 30, 0.25) 35%, rgba(15, 19, 30, 0.75) 100%);
+}
+
+.unit-panel__close {
+  position: fixed;
+  top: 24px;
+  right: 396px;
+  z-index: 111;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 15, 24, 0.55);
+  border: 1px solid rgba(250, 247, 241, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 50%;
+  color: var(--paper);
+  font-size: 24px;
+  line-height: 1;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.unit-panel__close:hover {
+  background: rgba(250, 247, 241, 0.92);
+  color: var(--navy-deep);
+}
+
+.unit-panel__panel {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  bottom: 24px;
+  z-index: 5;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: rgba(12, 15, 24, 0.6);
+  border: 1px solid rgba(250, 247, 241, 0.12);
+  backdrop-filter: blur(22px);
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 154, 99, 0.35) transparent;
+}
+
+.unit-panel__panel::-webkit-scrollbar {
+  width: 3px;
+}
+.unit-panel__panel::-webkit-scrollbar-thumb {
+  background: rgba(199, 154, 99, 0.35);
+  border-radius: 3px;
+}
+
+.unit-panel__eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  color: var(--accent-light);
+  margin-bottom: 4px;
+}
+
+.unit-panel__panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--paper);
+}
+
+.unit-panel__stats {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid rgba(250, 247, 241, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unit-panel__stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 12px;
+}
+
+.unit-panel__stats-label {
+  color: var(--mute-2);
+}
+
+.unit-panel__stats-value {
+  color: var(--accent-light);
+  font-weight: 500;
+}
+
+.unit-panel__divider {
+  border-top: 1px solid rgba(250, 247, 241, 0.14);
+  margin: 18px 0;
+}
+
+.unit-panel__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 400px 48px 160px;
+}
+
+/* huge ghost numeral behind the plan — announces the selected level */
+.unit-panel__ghost-num {
+  position: absolute;
+  left: 300px;
+  bottom: 8px;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(180px, 24vw, 360px);
+  line-height: 0.8;
+  font-weight: 500;
+  color: rgba(199, 154, 99, 0.1);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Ocupa el área útil del stage; las vistas 2D/3D se superponen adentro
+   para poder hacer crossfade entre ellas */
+.unit-panel__plan-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.unit-panel__plan-card {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  background: transparent;
+  /* el blend va en la tarjeta: su interior forma un stacking context
+     propio y el blend en la <img> no llegaba al fondo */
+  mix-blend-mode: screen;
+}
+
+.unit-panel__plan {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* el PNG ya viene limpio y sin glow: sin filtros */
+  filter: none;
+}
+
+/* Vista 3D: render fotográfico — sin blend */
+.unit-panel__plan-card.is-photo {
+  mix-blend-mode: normal;
+}
+
+/* Switch 2D / 3D */
+.unit-panel__viewtoggle {
+  position: fixed;
+  left: calc(50vw - 120px);
+  bottom: 36px;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  background: rgba(10, 13, 21, 0.6);
+  border: 1px solid rgba(250, 247, 241, 0.14);
+  backdrop-filter: blur(18px);
+  border-radius: 999px;
+}
+
+.unit-panel__viewtoggle button {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: rgba(250, 247, 241, 0.6);
+  transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.unit-panel__viewtoggle button:hover {
+  color: var(--paper);
+}
+
+.unit-panel__viewtoggle button.is-on {
+  background: var(--accent-light);
+  color: var(--navy-deep);
+  font-weight: 600;
+}
+
+.floor-panel__label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--mute-2);
+  margin-bottom: 4px;
+}
+
+.floor-panel__summary {
+  margin: 0 0 12px;
+  font-size: 11px;
+  color: var(--accent-light);
+}
+
+.floor-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  justify-items: center;
+  margin-bottom: 18px;
+}
+
+.floor-panel__grid::-webkit-scrollbar {
+  width: 3px;
+}
+.floor-panel__grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.floor-panel__grid::-webkit-scrollbar-thumb {
+  background: rgba(199, 154, 99, 0.35);
+  border-radius: 3px;
+}
+
+.floor-chip {
+  width: 100%;
+  max-width: 44px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(250, 247, 241, 0.05);
+  border: 1px solid rgba(250, 247, 241, 0.14);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.floor-chip:hover:not(:disabled) {
+  background: rgba(250, 247, 241, 0.16);
+  border-color: rgba(250, 247, 241, 0.3);
+  transform: scale(1.06);
+}
+
+.floor-chip.is-active {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+  color: var(--navy-deep);
+  font-weight: 700;
+}
+
+.floor-chip--reservado:not(.is-active) {
+  color: rgba(250, 247, 241, 0.35);
+  border-color: rgba(250, 247, 241, 0.08);
+}
+
+.floor-chip--vendido:not(.is-active) {
+  color: rgba(250, 247, 241, 0.2);
+  border-color: rgba(250, 247, 241, 0.06);
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.floor-chip--amenities:not(.is-active) {
+  color: var(--accent-light);
+  border-color: rgba(199, 154, 99, 0.45);
+  background: rgba(199, 154, 99, 0.09);
+}
+
+.floor-panel__legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--mute-2);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot--disponible { background: rgba(250, 247, 241, 0.5); }
+.legend-dot--reservado  { background: rgba(250, 247, 241, 0.2); }
+.legend-dot--vendido    { background: rgba(250, 247, 241, 0.08); }
+.legend-dot--amenities  { background: var(--accent-light); }
+
+.floor-panel__detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 247, 241, 0.12);
+}
+
+.floor-panel__floor-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--paper);
+}
+
+.floor-panel__area {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--accent-light);
+}
+
+.floor-panel__gallery-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--accent-light);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0;
+}
+
+/* Mobile: the right-side panel becomes a bottom sheet, sitting clear of the
+   icon rail's bottom bar. Close + view toggle move up top since the bottom
+   edge is now occupied by the sheet and the nav bar underneath it. */
+@media (max-width: 900px) {
+  .unit-panel__stage {
+    padding: 92px 20px calc(38vh + 116px);
+  }
+
+  .unit-panel__close {
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+  }
+
+  .unit-panel__panel {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: max(92px, calc(env(safe-area-inset-bottom) + 80px));
+    width: auto;
+    max-height: 38vh;
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .unit-panel__ghost-num {
+    left: 20px;
+    bottom: 4px;
+    font-size: clamp(70px, 26vw, 140px);
+  }
+
+  .unit-panel__viewtoggle {
+    left: 50%;
+    top: max(16px, env(safe-area-inset-top));
+    bottom: auto;
+  }
+}

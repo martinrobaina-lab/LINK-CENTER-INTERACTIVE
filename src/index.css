@@ -1,0 +1,68 @@
+:root {
+  --navy-deep: #1a2030;
+  --navy: #27324a;
+  --accent: #9a6a3a;
+  --accent-light: #c79a63;
+  --paper: #faf7f1;
+  --paper-alt: #f0f0f0;
+  --mute: #59667b;
+  --mute-2: #bec4d2;
+  --mute-3: #cfcdc9;
+  --line: rgba(39, 50, 74, 0.14);
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+
+  --bar-height: 72px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+}
+
+body {
+  background: var(--navy-deep);
+  color: var(--paper);
+  font-family: var(--font-body);
+  overflow: hidden;
+  cursor: none;
+}
+
+body.touch-device {
+  cursor: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: none;
+}
+
+body.touch-device button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--navy-deep);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
